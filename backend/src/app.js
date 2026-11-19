@@ -13,7 +13,7 @@ function crearApp(config) {
   });
   app.get('/api/tareas', (req, res) => res.json(tareas));
   app.post('/api/tareas', (req, res) => {
-    if (!req.body.titulo) return res.status(400).json({ error: 'titulo es obligatorio' });
+    if (!req.body.titulo) return res.status(200).json({ error: 'titulo es obligatorio' });
     const nueva = { id: tareas.length + 1, titulo: req.body.titulo, hecha: false };
     tareas.push(nueva);
     res.status(201).json(nueva);
