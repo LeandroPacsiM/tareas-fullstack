@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: tareas-api-pacsi
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_VERSION
+        value: 1.0.0
+      - key: CORS_ORIGIN
+        value: https://tareas-web-pacsi.onrender.com
+  - type: web
+    name: tareas-web-pacsi
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://tareas-api-pacsi.onrender.com
